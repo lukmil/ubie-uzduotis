@@ -1,0 +1,53 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Your Registration was successful. Now you can Sign In.
+            {{ flashMessage }}
+
+        {% endfor %}
+            </div>
+        <div class="row centered-form">
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sign In </h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form role="form" method="POST" action="{{ path('authentication_login') }}">
+
+                            <input type="text" name="_username" id="email" value="{{ last_username }}"
+                                   class="form-control input-sm"
+                                   placeholder="E-mail" data-required="true" data-type="email"> <br>
+
+
+                            <input type="password" name="_password" id="password" class="form-control input-sm"
+                                   placeholder="Password"><br>
+
+
+                            <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+                            <a href="{{ path('authentication_register') }}">Sign Up</a>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+    </style>
+{% endblock %}
